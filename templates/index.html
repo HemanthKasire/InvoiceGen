@@ -1,0 +1,77 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #e6f7ff; /* Change the background color to light blue */
+    }
+
+    .card {
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        background: linear-gradient(45deg, #b3e0ff, #66b3ff); /* Change the background color inside the card */
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        color: #004080; /* Change the title color to a darker blue */
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+        color: #eee;
+        font-size: 1.1rem;
+    }
+
+    .btn-primary {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="card-group">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for p in products %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ p.img.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.name}}</h5>
+                        <p class="card-text"> {{p.dis}}</p>
+                        <p><h2>Price: </h2>{{p.price}}</h2></p>
+                        <form method="get" action=" {% url 'buy' p.id %} ">
+                            <button type="submit" class="btn btn-primary mb-3">Buy Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
